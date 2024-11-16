@@ -30,10 +30,10 @@ else:
 
     # Load predictions for each sector
     predictions_dict = {}
-    #predictions_path = os.path.join(os.path.dirname(__file__), "predictions")
+    predictions_path = os.path.join(os.path.dirname(__file__), "predictions")
     for sector in choose_from:
-        #predictions_dict[sector] = pd.read_csv(f"{predictions_path}/{sector}_predictions.csv")
-        predictions_dict[sector] = pd.read_csv(f"predictions/{sector}_predictions.csv")
+        predictions_dict[sector] = pd.read_csv(f"{predictions_path}/{sector}_predictions.csv")
+        #predictions_dict[sector] = pd.read_csv(f"predictions/{sector}_predictions.csv")
 
     # Sidebar sector selection
     selected_sectors = []
