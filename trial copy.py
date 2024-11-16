@@ -14,7 +14,7 @@ choose_from = ['Basic Materials', 'Energy', 'Financials', 'Industrials', 'Inform
 # Convert the 'DateTime' column to datetime
 input['DateTime'] = pd.to_datetime(input['DateTime'], format='%d.%m.%Y %H:%M')
 
-# Sidebar date selectors
+# Sidebar
 st.sidebar.title("Date Range Selection")
 start_date = st.sidebar.date_input("Start Date", value=pd.to_datetime('2019-01-07'))
 end_date = st.sidebar.date_input("End Date", value=input['DateTime'].max())
@@ -33,7 +33,7 @@ else:
     #predictions_path = os.path.join(os.path.dirname(__file__), "predictions")
     for sector in choose_from:
         #predictions_dict[sector] = pd.read_csv(f"{predictions_path}/{sector}_predictions.csv")
-        predictions_dict[sector] = pd.read_csv(f"{sector}_predictions.csv")
+        predictions_dict[sector] = pd.read_csv(f"predictions/{sector}_predictions.csv")
 
     # Sidebar sector selection
     selected_sectors = []
