@@ -142,7 +142,7 @@ else:
         x=input_filtered['DateTime'], 
         y=actual_sectors_cumulative[:len(input_filtered)], 
         mode='lines', 
-        name="Actual Cumulative Return",
+        name="Market Cumulative Return",
         hovertemplate=(
             "%{x|%Y-%m-%d}<br>"
             + "Actual: %{y:.2f}"
