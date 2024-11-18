@@ -145,7 +145,7 @@ else:
         name="Market Cumulative Return",
         hovertemplate=(
             "%{x|%Y-%m-%d}<br>"
-            + "Actual: %{y:.2f}"
+            + "Market: %{y:.2f}"
             + "<extra></extra>"
         )
     ))
