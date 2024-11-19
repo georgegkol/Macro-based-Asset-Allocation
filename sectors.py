@@ -233,10 +233,31 @@ else:
 
     sharpe_ratio_equallyweighted = ((1 + equallyweighted_sectors_cumulative[-1]) ** (1/5.8) - 1 - 0.011) / (np.std(daily_returns) * np.sqrt(252))
 
+
+    # ADD SP500
+    sp500 = input[['DateTime','SPDR S&P 500 ETF Trust']]
+    predictions_dict[choose_from[0]]['DateTime']
+    sp500 = sp500[sp500['DateTime'].isin(valid_dates)]
+    sp = sp500['SPDR S&P 500 ETF Trust'].pct_change()
+    sp500_cumulative = (1 + sp500['Daily_Return']).cumprod() - 1
+    
     # **Plot Both Cumulative Returns on the Same Graph**
     fig_cumulative = go.Figure()
 
     # Add the actual sector cumulative return
+
+    fig_cumulative.add_trace(go.Scatter(
+        x=input_filtered['DateTime'], 
+        y=sp500_cumulative[:len(input_filtered)], 
+        mode='lines', 
+        name="S&P500 Cumulative Return",
+        hovertemplate=(
+            "%{x|%Y-%m-%d}<br>"
+            + "S&P500: %{y:.2f}"
+            + "<extra></extra>"
+        )
+    ))
+    
     fig_cumulative.add_trace(go.Scatter(
         x=input_filtered['DateTime'], 
         y=actual_sectors_cumulative[:len(input_filtered)], 
