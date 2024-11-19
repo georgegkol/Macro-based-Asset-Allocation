@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import os
 import numpy as np
+from scipy.optimize import minimize
 
 # File IDs from the link
 link_input = '1A9aTYrAWyEmIBHAw56XkM-H8ArF_kmuX'
