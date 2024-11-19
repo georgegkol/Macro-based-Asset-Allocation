@@ -76,7 +76,7 @@ else:
         template='plotly_dark'
     )
 
-    st.header("U.S. Sector ETFs - Buy/ Sell Signals")
+    st.header("MSCI Indexes - Buy/ Sell Signals")
     st.text("Hover over a specific day in the graph to see the model's buy/sell recommendation. \n Please do not choose an earlier date than the 7th of January 2019.")
     st.plotly_chart(fig)
 
@@ -178,7 +178,7 @@ else:
         template='plotly_dark'
     )
 
-    st.header("Cumulative Returns of Selected Sectors")
-    st.text("Choosing fewer than 7 sectors will severely impact model performance, reducing diversification.")
+    st.header("Cumulative Returns of Selected Indexes")
+    st.text("Choosing fewer can neegatively impact model performance, reducing diversification.")
     st.plotly_chart(fig_cumulative)
 
