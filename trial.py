@@ -116,10 +116,10 @@ else:
                 number_bullish += 1
                 daily += predictions_dict[industry]['Actual_Daily_Returns'].iloc[i+1]
 
-        if number_bullish <= 2:
+        if daily == 0:
             was_out_of_market = True
             daily_returns.append(0.011/365)
-        elif daily == 0:
+        elif number_bullish <= 2:
             was_out_of_market = True
             daily_returns.append(0.011/365)
         else:
