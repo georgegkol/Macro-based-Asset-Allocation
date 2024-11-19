@@ -119,7 +119,7 @@ else:
         if daily == 0:
             was_out_of_market = True
             daily_returns.append(0.011/365)
-        elif number_bullish <= 2:
+        elif number_bullish <= 0:
             was_out_of_market = True
             daily_returns.append(0.011/365)
         else:
