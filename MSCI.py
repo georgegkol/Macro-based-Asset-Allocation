@@ -35,6 +35,9 @@ else:
     #predictions_path = os.path.join(os.path.dirname(__file__), "predictions")
     for sector in choose_from:
         predictions_dict[sector] = pd.read_csv(f"predictions_MSCI/{sector}_predictions.csv")
+    
+  valid_dates = predictions_dict[choose_from[0]]['DateTime']  # Get the 'DateTime' values from the first sector
+  input_filtered = input_filtered[input_filtered['DateTime'].isin(valid_dates)]
 
     # Sidebar sector selection
     selected_sectors = []
