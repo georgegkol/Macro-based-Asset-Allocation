@@ -5,11 +5,12 @@ import os
 import numpy as np
 
 # File IDs from the link
-link_input = '1A9aTYrAWyEmIBHAw56XkM-H8ArF_kmuX'
+link_input = '1-CrON3CcQAQck-xX8OzZlWeyeThdfZHc'
 download_url = f"https://drive.google.com/uc?id={link_input}"
 input = pd.read_csv(download_url)
 
-choose_from = ['Basic Materials', 'Energy', 'Financials', 'Industrials', 'Information Technology', 'Consumer Staples', 'Utilities', 'Healthcare', 'Consumer Discretionary']
+choose_from = ['MSCI World', 'MSCI World Momentum', 'MSCI World Quality', 'MSCI World High Dividend Yield', 'MSCI World Volatility', 
+               'MSCI World Equal Weight', 'MSCI World Small Cap', 'MSCI World Prime Value', 'MSCI World Risk Weighted']
 
 # Convert the 'DateTime' column to datetime
 input['DateTime'] = pd.to_datetime(input['DateTime'], format='%d.%m.%Y %H:%M')
@@ -30,10 +31,9 @@ else:
 
     # Load predictions for each sector
     predictions_dict = {}
-    #predictions_path = os.path.join(os.path.dirname(__file__), "predictions")
+    predictions_path = os.path.join(os.path.dirname(__file__), "predictions")
     for sector in choose_from:
-        #predictions_dict[sector] = pd.read_csv(f"{predictions_path}/{sector}_predictions.csv")
-        predictions_dict[sector] = pd.read_csv(f"predictions/{sector}_predictions.csv")
+        predictions_dict[sector] = pd.read_csv(f"{predictions_path}/{sector}_predictions.csv")
 
     # Sidebar sector selection
     selected_sectors = []
@@ -45,17 +45,23 @@ else:
 
     # Plot sector performance
     fig = go.Figure()
+    # Normalize and plot each sector
     for sector in selected_sectors:
         # Get the prediction data for the sector
         prediction = predictions_dict[sector]
         
-        # Define action message for each date
+        # Adjust prediction length
+        prediction = prediction.head(len(input_filtered))
         action = ["Buy" if val == 1 else "Sell" for val in prediction['Predicted_Cluster']]
+        
+        # Normalize sector data to start from the same point
+        sector_values = input_filtered[f'{sector}']
+        normalized_values = sector_values / sector_values.iloc[0]  # Normalize to start at 1
         
         # Add sector data to the plot
         fig.add_trace(go.Scatter(
             x=input_filtered['DateTime'], 
-            y=input_filtered[f'U.S. {sector}'], 
+            y=normalized_values,  # Use normalized values
             mode='lines', 
             name=sector,
             hovertemplate="%{customdata}<br>" + "%{x|%Y-%m-%d}",
@@ -76,10 +82,10 @@ else:
 
     # Calculate daily returns
     for sector in choose_from:
-        input[f'U.S. {sector}'] = input[f'U.S. {sector}'].pct_change()
+        input[f'{sector}'] = input[f'{sector}'].pct_change()
     
     input = input.dropna()
-    timeline_df = pd.to_datetime(predictions_dict['Basic Materials']['DateTime'])
+    timeline_df = pd.to_datetime(predictions_dict['MSCI World']['DateTime'])
     
     # **Actual Daily and Cumulative Returns Calculation**
     actual_daily_returns = []
@@ -116,10 +122,10 @@ else:
                 number_bullish += 1
                 daily += predictions_dict[industry]['Actual_Daily_Returns'].iloc[i+1]
 
-        if daily == 0:
+        if number_bullish <= 0:
             was_out_of_market = True
             daily_returns.append(0.011/365)
-        elif number_bullish <= 0:
+        elif daily == 0:
             was_out_of_market = True
             daily_returns.append(0.011/365)
         else:
@@ -142,10 +148,10 @@ else:
         x=input_filtered['DateTime'], 
         y=actual_sectors_cumulative[:len(input_filtered)], 
         mode='lines', 
-        name="Market Cumulative Return",
+        name="Actual Cumulative Return",
         hovertemplate=(
             "%{x|%Y-%m-%d}<br>"
-            + "Market: %{y:.2f}"
+            + "Actual: %{y:.2f}"
             + "<extra></extra>"
         )
     ))
@@ -165,7 +171,7 @@ else:
 
     # Customize layout for cumulative returns chart
     fig_cumulative.update_layout(
-        title=f'Sharpe Ratios Market: {sharpe_ratio_actual:.2f}, Equally Weighted Portfolio: {sharpe_ratio_equallyweighted:.2f}',
+        title=f'Sharpe Ratios \n Market: {sharpe_ratio_actual:.2f}, Equally Weighted Portfolio: {sharpe_ratio_equallyweighted:.2f}',
         xaxis_title='Date',
         yaxis_title='Cumulative Return',
         hovermode='x unified',
