@@ -234,7 +234,7 @@ else:
         x=input_filtered['DateTime'], 
         y=actual_sectors_cumulative[:len(input_filtered)], 
         mode='lines', 
-        name="Actual Cumulative Return",
+        name="Market Cumulative Return",
         hovertemplate=(
             "%{x|%Y-%m-%d}<br>"
             + "Actual: %{y:.2f}"
@@ -278,6 +278,6 @@ else:
     )
 
     st.header("Cumulative Returns of Selected Indexes")
-    st.text("Choosing fewer can neegatively impact model performance, reducing diversification.")
+    st.text("Choosing fewer can negatively impact model performance, reducing diversification.")
     st.plotly_chart(fig_cumulative)
 
