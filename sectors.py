@@ -249,6 +249,19 @@ else:
         )
     ))
 
+    # Add the minimum variance portfolio cumulative return
+    fig_cumulative.add_trace(go.Scatter(
+        x=input_filtered['DateTime'], 
+        y=mvp_cumulative_returns[:len(input_filtered)], 
+        mode='lines', 
+        name="Minimum Variance Portfolio",
+        hovertemplate=(
+            "%{x|%Y-%m-%d}<br>"
+            + "MVP: %{y:.2f}"
+            + "<extra></extra>"
+        )
+    ))
+
     # Add the equally weighted portfolio cumulative return
     fig_cumulative.add_trace(go.Scatter(
         x=input_filtered['DateTime'], 
