@@ -289,7 +289,7 @@ else:
     )
 
 
-    st.header("Cumulative Returns of Selected Indexes")
+    st.header("Cumulative Returns of Selected MSCI Indexes")
     st.text("Choosing fewer can negatively impact model performance, reducing diversification.")
     st.plotly_chart(fig_cumulative)
 
