@@ -238,8 +238,8 @@ else:
     sp500 = input[['DateTime','SPDR S&P 500 ETF Trust']]
     predictions_dict[choose_from[0]]['DateTime']
     sp500 = sp500[sp500['DateTime'].isin(valid_dates)]
-    sp = sp500['SPDR S&P 500 ETF Trust'].pct_change()
-    sp500_cumulative = (1 + sp500['Daily_Return']).cumprod() - 1
+    sp500_returns = sp500['SPDR S&P 500 ETF Trust'].pct_change()
+    sp500_cumulative = (1 + sp500_returns).cumprod() - 1
     
     # **Plot Both Cumulative Returns on the Same Graph**
     fig_cumulative = go.Figure()
