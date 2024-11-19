@@ -263,10 +263,10 @@ else:
         x=input_filtered['DateTime'], 
         y=mvp_cumulative_returns[:len(input_filtered)], 
         mode='lines', 
-        name="Minimum Variance Portfolio",
+        name="Minimum Variance Cumulative Return",
         hovertemplate=(
             "%{x|%Y-%m-%d}<br>"
-            + "MVP: %{y:.2f}"
+            + "Minimum Variance: %{y:.2f}"
             + "<extra></extra>"
         )
     ))
@@ -279,7 +279,7 @@ else:
         name="Equally Weighted Cumulative Return",
         hovertemplate=(
             "%{x|%Y-%m-%d}<br>"
-            + "Equally Weighted Portfolio: %{y:.2f}"
+            + "Equally Weighted: %{y:.2f}"
             + "<extra></extra>"
         )
     ))
