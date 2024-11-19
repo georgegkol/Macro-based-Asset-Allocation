@@ -54,7 +54,7 @@ else:
         action = ["Buy" if val == 1 else "Sell" for val in prediction['Predicted_Cluster']]
         
         # Normalize sector data to start from the same point
-        sector_values = input_filtered[f'{sector}']
+        sector_values = input_filtered[f'U.S. {sector}']
         normalized_values = sector_values / sector_values.iloc[0]  # Normalize to start at 1
         
         # Add sector data to the plot
