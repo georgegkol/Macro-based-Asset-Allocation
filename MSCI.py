@@ -52,8 +52,8 @@ else:
         prediction = predictions_dict[sector]
         
         # Adjust prediction length
-        #prediction = prediction.head(len(input_filtered))
-        prediction = prediction[prediction['DateTime'].isin(input_filtered['DateTime'])]
+        prediction = prediction.head(len(input_filtered))
+        #prediction = prediction[prediction['DateTime'].isin(input_filtered['DateTime'])]
         action = ["Buy" if val == 1 else "Sell" for val in prediction['Predicted_Cluster']]
         
         # Normalize sector data to start from the same point
