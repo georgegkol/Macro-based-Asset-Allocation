@@ -178,5 +178,5 @@ else:
     )
 
     st.header("Cumulative Returns of Selected Sectors")
-    st.text("Choosing fewer than 7 sectors will severely impact model performance, reducing diversification.")
+    st.text("Choosing fewer sectors can negatively impact model performance, reducing diversification.")
     st.plotly_chart(fig_cumulative)
