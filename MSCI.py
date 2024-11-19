@@ -274,7 +274,7 @@ else:
 
     # Customize layout for cumulative returns chart
     fig_cumulative.update_layout(
-        title=f'Sharpe Ratios \n Market: {sharpe_ratio_actual:.2f}, Minimum Variance Portfolio: {sharpe_ratio_minvar:.2f}, Equally Weighted Portfolio: {sharpe_ratio_equallyweighted:.2f}',
+        title=f'Sharpe Ratios <br> Market: {sharpe_ratio_actual:.2f}<br> Minimum Variance Portfolio: {sharpe_ratio_minvar:.2f} <br> Equally Weighted Portfolio: {sharpe_ratio_equallyweighted:.2f}',
         xaxis_title='Date',
         yaxis_title='Cumulative Return',
         hovermode='x unified',
