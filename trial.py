@@ -49,13 +49,18 @@ else:
         # Get the prediction data for the sector
         prediction = predictions_dict[sector]
         
-        # Define action message for each date
+        # Adjust prediction length
+        prediction = prediction.head(len(input_filtered))
         action = ["Buy" if val == 1 else "Sell" for val in prediction['Predicted_Cluster']]
+        
+        # Normalize sector data to start from the same point
+        sector_values = input_filtered[f'{sector}']
+        normalized_values = sector_values / sector_values.iloc[0]  # Normalize to start at 1
         
         # Add sector data to the plot
         fig.add_trace(go.Scatter(
             x=input_filtered['DateTime'], 
-            y=input_filtered[f'U.S. {sector}'], 
+            y=normalized_values,  # Use normalized values
             mode='lines', 
             name=sector,
             hovertemplate="%{customdata}<br>" + "%{x|%Y-%m-%d}",
