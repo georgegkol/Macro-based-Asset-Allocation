@@ -277,12 +277,20 @@ else:
 
     # Customize layout for cumulative returns chart
     fig_cumulative.update_layout(
-        title=f'Sharpe Ratios <br> Market: {sharpe_ratio_actual:.2f} <br> Minimum Variance Portfolio: {sharpe_ratio_minvar:.2f} <br> Equally Weighted Portfolio: {sharpe_ratio_equallyweighted:.2f}',
+        title={
+            'text': f'Sharpe Ratios <br> Market: {sharpe_ratio_actual:.2f}<br> Minimum Variance Portfolio: {sharpe_ratio_minvar:.2f} <br> Equally Weighted Portfolio: {sharpe_ratio_equallyweighted:.2f}',
+            'x': 0.5,  # Center the title
+            'y': 0.95,  # Adjust vertical placement of title
+            'xanchor': 'center',
+            'yanchor': 'top',
+        },
+        margin=dict(t=100),  # Increase top margin to add space
         xaxis_title='Date',
         yaxis_title='Cumulative Return',
         hovermode='x unified',
         template='plotly_dark'
     )
+
 
     st.header("Cumulative Returns of Selected Sectors")
     st.text("Choosing fewer sectors can negatively impact model performance, reducing diversification.")
