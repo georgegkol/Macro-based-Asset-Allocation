@@ -236,7 +236,7 @@ else:
 
     # ADD SP500
     sp500 = input[['DateTime','SPDR S&P 500 ETF Trust']]
-    predictions_dict[choose_from[0]]['DateTime']
+    valid_dates = predictions_dict[choose_from[0]]['DateTime']
     sp500 = sp500[sp500['DateTime'].isin(valid_dates)]
     sp500_returns = sp500['SPDR S&P 500 ETF Trust'].pct_change()
     sp500_cumulative = (1 + sp500_returns).cumprod() - 1
@@ -245,18 +245,6 @@ else:
     fig_cumulative = go.Figure()
 
     # Add the actual sector cumulative return
-
-    fig_cumulative.add_trace(go.Scatter(
-        x=input_filtered['DateTime'], 
-        y=sp500_cumulative[:len(input_filtered)], 
-        mode='lines', 
-        name="S&P500 Cumulative Return",
-        hovertemplate=(
-            "%{x|%Y-%m-%d}<br>"
-            + "S&P500: %{y:.2f}"
-            + "<extra></extra>"
-        )
-    ))
     
     fig_cumulative.add_trace(go.Scatter(
         x=input_filtered['DateTime'], 
@@ -292,6 +280,18 @@ else:
         hovertemplate=(
             "%{x|%Y-%m-%d}<br>"
             + "Equally Weighted Portfolio: %{y:.2f}"
+            + "<extra></extra>"
+        )
+    ))
+
+    fig_cumulative.add_trace(go.Scatter(
+        x=input_filtered['DateTime'], 
+        y=sp500_cumulative[:len(input_filtered)], 
+        mode='lines', 
+        name="S&P500 Cumulative Return",
+        hovertemplate=(
+            "%{x|%Y-%m-%d}<br>"
+            + "S&P500: %{y:.2f}"
             + "<extra></extra>"
         )
     ))
