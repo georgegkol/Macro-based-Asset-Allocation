@@ -35,6 +35,9 @@ else:
         #predictions_dict[sector] = pd.read_csv(f"{predictions_path}/{sector}_predictions.csv")
         predictions_dict[sector] = pd.read_csv(f"predictions_sectors/{sector}_predictions.csv")
 
+    valid_dates = predictions_dict[choose_from[0]]['DateTime']  # Get the 'DateTime' values from the first sector
+    input_filtered = input_filtered[input_filtered['DateTime'].isin(valid_dates)]
+
     # Sidebar sector selection
     selected_sectors = []
     with st.sidebar:
