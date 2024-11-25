@@ -280,7 +280,7 @@ else:
         )
     ))
 
-  fig_cumulative.add_trace(go.Scatter(
+    fig_cumulative.add_trace(go.Scatter(
         x=input_filtered['DateTime'], 
         y=mci_world_cumulative[:len(input_filtered)], 
         mode='lines', 
