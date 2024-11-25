@@ -281,16 +281,16 @@ else:
     ))
 
   fig_cumulative.add_trace(go.Scatter(
-          x=input_filtered['DateTime'], 
-          y=mci_world_cumulative[:len(input_filtered)], 
-          mode='lines', 
-          name="MCI World Cumulative Return",
-          hovertemplate=(
-              "%{x|%Y-%m-%d}<br>"
-              + "MCI World: %{y:.2f}"
-              + "<extra></extra>"
-          )
-      ))
+      x=input_filtered['DateTime'], 
+      y=mci_world_cumulative[:len(input_filtered)], 
+      mode='lines', 
+      name="MCI World Cumulative Return",
+      hovertemplate=(
+          "%{x|%Y-%m-%d}<br>"
+          + "MCI World: %{y:.2f}"
+          + "<extra></extra>"
+      )
+  ))
 
     # Customize layout for cumulative returns chart
     fig_cumulative.update_layout(
