@@ -230,6 +230,14 @@ else:
 
     sharpe_ratio_equallyweighted = ((1 + equallyweighted_sectors_cumulative[-1]) ** (1/5.8) - 1 - 0.011) / (np.std(daily_returns) * np.sqrt(252))
 
+
+    # ADD SP500
+      mci_world = input[['DateTime','MSCI World']]
+      valid_dates = predictions_dict[choose_from[0]]['DateTime']
+      mci_world = mci_world[mci_world['DateTime'].isin(valid_dates)]
+      mci_world_returns = mci_world['MSCI World'].pct_change()
+      mci_world_cumulative = (1 + sp500_returns).cumprod() - 1
+
     # **Plot Both Cumulative Returns on the Same Graph**
     fig_cumulative = go.Figure()
 
@@ -271,6 +279,18 @@ else:
             + "<extra></extra>"
         )
     ))
+
+  fig_cumulative.add_trace(go.Scatter(
+          x=input_filtered['DateTime'], 
+          y=mci_world_cumulative[:len(input_filtered)], 
+          mode='lines', 
+          name="MCI World Cumulative Return",
+          hovertemplate=(
+              "%{x|%Y-%m-%d}<br>"
+              + "MCI World: %{y:.2f}"
+              + "<extra></extra>"
+          )
+      ))
 
     # Customize layout for cumulative returns chart
     fig_cumulative.update_layout(
