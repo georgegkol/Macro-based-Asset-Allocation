@@ -234,7 +234,7 @@ else:
     # ADD SP500
     mci_world = input[['DateTime','MSCI World']]
     valid_dates = predictions_dict[choose_from[0]]['DateTime']
-    mci_world = input[input['DateTime'].isin(valid_dates)]
+    mci_world = input_filtered[input_filtered['DateTime'].isin(valid_dates)]
     mci_world_returns = mci_world['MSCI World'].pct_change()
     mci_world_cumulative = (1 + mci_world_returns).cumprod() - 1
 
