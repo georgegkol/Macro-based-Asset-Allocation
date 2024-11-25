@@ -236,7 +236,7 @@ else:
     valid_dates = predictions_dict[choose_from[0]]['DateTime']
     mci_world = mci_world[mci_world['DateTime'].isin(valid_dates)]
     mci_world_returns = mci_world['MSCI World'].pct_change()
-    mci_world_cumulative = (1 + sp500_returns).cumprod() - 1
+    mci_world_cumulative = (1 + mci_world_returns).cumprod() - 1
 
     # **Plot Both Cumulative Returns on the Same Graph**
     fig_cumulative = go.Figure()
