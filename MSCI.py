@@ -126,7 +126,7 @@ else:
             daily = -0.001
 
         # Go through every sector for a given trading day
-        for sector in choose_from:
+        for sector in selected_sectors:
 
             # If a sector is predicted bullish, include it in that day's portfolio
             cluster = predictions_dict[sector]['Predicted_Cluster'].iloc[i]
