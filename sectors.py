@@ -146,7 +146,7 @@ else:
             daily_returns.append(0.011/365)
             was_out_of_market = True
 
-        elif len(sectors_bullish) <=3:
+        elif len(sectors_bullish) <=0:
             daily_returns.append(0.011/365)
             was_out_of_market = True
 
